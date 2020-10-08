@@ -7,15 +7,6 @@ import csv
 
 csvpath = os.path.join('Resources', 'budget_data.csv')
 
-# Method 1: Plain Reading of CSV files
-# with open(csvpath, 'r') as file_handler:
-#     lines = file_handler.read()
-#     print(lines)
-#     print(type(lines))
-
-
-#Method 2: Improved Reading using CSV module
-
 with open(csvpath) as csvfile:
 
     # CSV reader specifies delimiter and variable that holds contents
@@ -26,7 +17,18 @@ with open(csvpath) as csvfile:
     # Read the header row first (skip this step if there is now header)
     csv_header = next(csvreader)
     print(f"CSV Header: {csv_header}")
-
-    # Read each row of data after the header
+    
+    
+    # Read each row of data after the header, add index
+    index = 0
     for row in csvreader:
-        print(row)
+        
+        #print(row)
+        #print(f'[{str(csvreader.index(row))}] {row}')
+        # print(f"[{index}] {row}")
+        # index += 1
+        print(index, row)
+        index += 1
+
+#total number of months included in the dataset
+
