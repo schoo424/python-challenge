@@ -21,26 +21,32 @@ with open(csvpath) as csvfile:
       #for row in csvreader:
     total_profit = 0
     total_month = 0
-    previous = 0
+    previous_month = 0
     total_change = 0
     greatest_increase = 0
-    greatest_month = ""
-    greatest_decrease = 0
+    greatest_increase_month = ""
+    greatest_decrease = 999999999
+    greatest_decrease_month = ""
 
     for row in csvreader:                   
         total_month += 1       
         
         total_profit += int(row[1])         
      
-        current = int(row[1])        
+        current_month = int(row[1])        
 
         if total_month > 1:
-            change = current - previous 
+            change = current_month - previous_month
             total_change += change
             if change > greatest_increase:
                 greatest_increase = change
-                greatest_month = row[0]
-        previous = current
+                greatest_increase_month = row[0]
+
+            if change < greatest_decrease:
+                greatest_decrease = change
+                greatest_decrease_month = row[0]
+                
+        previous_month = current_month
 
 
        
@@ -49,35 +55,5 @@ print("-------------------------------------------------------------------------
 print("Total Month: " + str(total_month))
 print("Total: " + str(total_profit))
 print("Avg Change: " + str(total_change/(total_month-1)))
-print("greatest increase in profits: " + greatest_month + " " + str(greatest_increase))
-    
-
-        
-        
-       
-        
-# get the row count in the CSV 
-        # row_count = len(list(csvreader)
-        # record_count = row_count -1
-        # print(record_count
-
-        # def row_count()
-        # print(f"[{index}] {row}")
-        # index += 1        
-#total number of months included in the dataset
-#   The net total amount of "Profit/Losses" over the entire period
-
-#   The average of the changes in "Profit/Losses" over the entire period
-# Sum of all changes divided by # of (total rows -1)
-        # def average(profit_loss):
-        #     length = len(profit_loss)
-        #     total = 0.0
-        #     for number in profit_loss:
-        #             total += number
-        #     return total / length
-        
-        
-#   The greatest increase in profits (date and amount) over the entire period
-
-#   The greatest decrease in losses (date and amount) over the entire period
-    
+print("Greatest Increase in Profits: " + greatest_increase_month + " " + str(greatest_increase))
+print("greatest decrease in profits: " + greatest_decrease_month + " " + str(greatest_decrease))
