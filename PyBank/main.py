@@ -18,17 +18,43 @@ with open(csvpath) as csvfile:
     csv_header = next(csvreader)
     # print(f"CSV Header: {csv_header}")
     
-    
-    # index = 0
-    for row in csvreader:
-                
-        row_count = len(list(csvreader)) + 1
+      #for row in csvreader:
+    total_profit = 0
+    total_month = 0
+    previous = 0
+    total_change = 0
+    greatest_increase = 0
+    greatest_month = ""
+    greatest_decrease = 0
+
+    for row in csvreader:                   
+        total_month += 1       
         
-        print("Financial Analysis")
-        print("---------------------------------------------------------------------------------")
-        print("Total Month: " + str(row_count))
+        total_profit += int(row[1])         
+     
+        current = int(row[1])        
+
+        if total_month > 1:
+            change = current - previous 
+            total_change += change
+            if change > greatest_increase:
+                greatest_increase = change
+                greatest_month = row[0]
+        previous = current
+
+
+       
+print("Financial Analysis")
+print("---------------------------------------------------------------------------------")
+print("Total Month: " + str(total_month))
+print("Total: " + str(total_profit))
+print("Avg Change: " + str(total_change/(total_month-1)))
+print("greatest increase in profits: " + greatest_month + " " + str(greatest_increase))
+    
 
         
+        
+       
         
 # get the row count in the CSV 
         # row_count = len(list(csvreader)
@@ -42,6 +68,7 @@ with open(csvpath) as csvfile:
 #   The net total amount of "Profit/Losses" over the entire period
 
 #   The average of the changes in "Profit/Losses" over the entire period
+# Sum of all changes divided by # of (total rows -1)
         # def average(profit_loss):
         #     length = len(profit_loss)
         #     total = 0.0
