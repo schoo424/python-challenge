@@ -57,3 +57,15 @@ print("Total: " + str(total_profit))
 print("Avg Change: " + str(total_change/(total_month-1)))
 print("Greatest Increase in Profits: " + greatest_increase_month + " " + str(greatest_increase))
 print("greatest decrease in profits: " + greatest_decrease_month + " " + str(greatest_decrease))
+
+output_path = os.path.join("Analysis", "PyBank_HW_Output.csv")
+
+with open(output_path, 'w') as csvfile:
+    csvwriter = csv.writer(csvfile, delimiter = ',')
+    csvwriter.writerow(['Financial Analysis'])
+    csvwriter.writerow(['----------------------------------------------------------------------'])
+    csvwriter.writerow(['Average Change', str(total_month)])
+    csvwriter.writerow(['Average Change', str(total_profit)])
+    csvwriter.writerow(['Average Change', str(total_change/(total_month-1))])
+    csvwriter.writerow(['Greatest Increase in Profits:', greatest_increase_month, greatest_increase])
+    csvwriter.writerow(['Greatest Increase in Profits:', greatest_decrease_month, greatest_decrease])
