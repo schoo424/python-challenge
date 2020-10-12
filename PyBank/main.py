@@ -1,5 +1,4 @@
-# First we'll import the os module
-# This will allow us to create file paths across operating systems
+# import the os module
 import os
 
 # Module for reading CSV files
@@ -14,7 +13,7 @@ with open(csvpath) as csvfile:
 
     print(csvreader)
 
-    # Read the header row first (skip this step if there is now header)
+    # Read the header row first (skip this step if there is no header)
     csv_header = next(csvreader)
     # print(f"CSV Header: {csv_header}")
     
@@ -29,10 +28,14 @@ with open(csvpath) as csvfile:
     greatest_decrease_month = ""
 
     for row in csvreader:                   
+        
+        #to sum up the # of months, get the running total
         total_month += 1       
         
+        #to sum up the total profit or loss which is in the second column within the dataset
         total_profit += int(row[1])         
-     
+
+        #set the value for the current_month 
         current_month = int(row[1])        
 
         if total_month > 1:
@@ -45,7 +48,8 @@ with open(csvpath) as csvfile:
             if change < greatest_decrease:
                 greatest_decrease = change
                 greatest_decrease_month = row[0]
-                
+
+        #setting current_month total to be previous_month so it can be used in the next iteration        
         previous_month = current_month
 
 
